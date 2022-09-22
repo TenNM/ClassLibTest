@@ -15,7 +15,7 @@
 
         public override double GetSquare()
         {
-            return Pi * Radius * Radius;
+            return Math.PI * Math.Pow(Radius, 2);
         }
     }
 }

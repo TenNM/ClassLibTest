@@ -1,0 +1,45 @@
+﻿.
+CREATE TABLE Products(
+ProductID int IDENTITY(1,1) NOT NULL,
+NameOf varchar(64) NOT NULL,
+PRIMARY KEY(ProductID)
+);
+.
+CREATE TABLE Categories(
+CategoryID int IDENTITY(1,1) NOT NULL,
+NameOf varchar(64) NOT NULL,
+ PRIMARY KEY(CategoryID)
+);
+.
+CREATE TABLE ProductsXCategories(
+XID int IDENTITY(1,1) NOT NULL PRIMARY KEY,
+ProductID int NOT NULL,
+CategoryID int NOT NULL,
+FOREIGN KEY(ProductID) REFERENCES Products(ProductID),
+FOREIGN KEY(CategoryID) REFERENCES Categories(CategoryID)
+);
+.
+INSERT INTO Products
+VALUES
+	('visual studio'),
+	('visual studio code'),
+	('windows'),
+	('notepad');
+.
+INSERT INTO Categories
+VALUES
+	('ide'),
+	('os');
+.
+INSERT INTO ProductsXCategories
+VALUES
+	(1, 1),
+	(2, 1),
+	(3, 2);
+.
+SELECT P.NameOf, C.NameOf
+FROM Products P
+LEFT JOIN ProductsXCategories PXC
+	ON P.ProductID  = PXC.ProductId
+LEFT JOIN Categories C
+	ON PXC.CategoryId = C.CategoryId;
